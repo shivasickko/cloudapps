@@ -59,5 +59,20 @@ dependencies {
     // https://mvnrepository.com/artifact/org.webrtc/google-webrt
 }
 dependencies {
-    implementation['com.github.deano2390:libwebrtc-android:59-MS']
+    // Jetpack Compose (if using)
+    implementation("androidx.compose.ui:ui:1.5.0")
+    implementation("androidx.compose.material:material:1.5.0")
+
+    // Networking (Retrofit for API calls)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // WebRTC (for real-time streaming)
+    implementation("org.webrtc:google-webrtc:1.0.32006")
+
+    // Firebase Auth
+    implementation("com.google.firebase:firebase-auth:22.1.1")
+
+    // Apache Guacamole (for remote desktop)
+    implementation("org.apache.guacamole:guacamole-common:1.5.0")
 }

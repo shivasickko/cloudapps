@@ -111,42 +111,26 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PermissionRationaleHandler(snackbarHostState: SnackbarHostState) {
-    val context = LocalContext.current
-    val activity = context as? MainActivity
+fun AppDashboard(navController: NavController) {
+    val apps = listOf("VS Code", "LibreOffice", "Chrome", "Terminal")
 
-    LaunchedEffect(Unit) {
-        activity?.let {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                val shouldShowRationale = listOf(
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.RECORD_AUDIO
-                ).any { permission ->
-                    activity.shouldShowRequestPermissionRationale(permission)
-                }
+    Column(modifier = Modifier.padding(16.dp)) {
+        Text("Select an App", style = MaterialTheme.typography.h4)
+        Spacer(modifier = Modifier.height(16.dp))
 
-                if (shouldShowRationale) {
-                    snackbarHostState.showSnackbar(
-                        "Camera and microphone permissions are required for video calls"
-                    )
+        LazyColumn {
+            items(apps) { app ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .clickable {
+                            navController.navigate("stream/$app")
+                        }
+                ) {
+                    Text(app, modifier = Modifier.padding(16.dp))
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    HackathonTheme {
-        Greeting("Android")
     }
 }
